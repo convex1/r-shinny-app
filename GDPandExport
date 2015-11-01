@@ -1,0 +1,132 @@
+# RShinyApp1
+A simple out the analyze GDP and Export Income of Countries
+## A basic template for building a shiny app
+
+# Load shiny library
+library(shiny)
+library(ggplot2)
+
+c <- read.csv("C:/Python27/GDPusdmil.csv")
+c <- as.numeric(c)
+d <- read.csv("C:/Python27/Exportsusdmil.csv")
+d <- as.numeric(d)
+
+# Function to set up the user interface object
+ui <- fluidPage (selectInput("Country", "Country:",
+                            c("Austria","Brazil","Argentina","Armenia","Bulgaria","Australia","Canada"    
+                              ,"Finland","Spain","France","Hungary","Italy","Ireland"
+                              ,"Nigeria","Mexico") ),
+                 
+                 selectInput("Criteria", "Criteria:",
+                             c("GDP","Exports") ),
+                 
+                mainPanel(
+                                wellPanel(
+                                  p("Below is the graph of the selected country."),
+                                  plotOutput("fig")
+                                )
+                                  )
+              )
+
+# Function to set up the server object
+server <- function(input, output) {
+  
+  year <- c$year
+  
+  dummy <- reactive({
+    if(input$Country=="Austria" && input$Criteria=="GDP" )
+      return(c$Austria)
+    else
+    if(input$Country =="Brazil" && input$Criteria=="GDP"  )
+      return(c$Brazil)
+    else
+    if(input$Country =="Argentina" && input$Criteria=="GDP"  )
+      return(c$Argentina)
+    else
+    if(input$Country =="Mexico" && input$Criteria=="GDP"  )
+      return(c$Mexico)
+    else
+    if(input$Country =="Nigeria" && input$Criteria=="GDP"  )
+        return(c$Nigeria)
+    else
+    if(input$Country =="France" && input$Criteria=="GDP"   )
+        return(c$France)
+    else
+    if(input$Country =="Italy" && input$Criteria=="GDP"  )
+      return(c$Italy)
+    else
+    if(input$Country =="Finland" && input$Criteria=="GDP"  )
+        return(c$Finland)
+    else
+    if(input$Country =="Spain" && input$Criteria=="GDP"   )
+        return(c$Spain)
+    else
+    if(input$Country =="Ireland" && input$Criteria=="GDP"  )
+      return(c$Ireland)
+    else
+    if(input$Country =="Bulgaria" && input$Criteria=="GDP" )
+        return(c$Bulgaria)
+    else
+    if(input$Country =="Canada"  && input$Criteria=="GDP"  )
+        return(c$Canada)
+    else
+    if(input$Country =="Australia" && input$Criteria=="GDP"  )
+      return(c$Australia)
+    else
+    if(input$Country =="Armenia" && input$Criteria=="Exports"  )
+        return(d$Armenia)
+    else
+    if(input$Country=="Austria" && input$Criteria=="Exports" )
+      return(d$Austria)
+    else
+      if(input$Country =="Brazil" && input$Criteria=="Exports" )
+        return(d$Brazil)
+    else
+      if(input$Country =="Argentina" && input$Criteria=="Exports"  )
+        return(d$Argentina)
+    else
+      if(input$Country =="Mexico" && input$Criteria=="Exports" )
+        return(d$Mexico)
+    else
+      if(input$Country =="Nigeria" && input$Criteria=="Exports"  )
+        return(d$Nigeria)
+    else
+      if(input$Country =="France" && input$Criteria=="Exports"  )
+        return(d$France)
+    else
+      if(input$Country =="Italy" && input$Criteria=="Exports"  )
+        return(d$Italy)
+    else
+      if(input$Country =="Finland" && input$Criteria=="Exports" )
+        return(d$Finland)
+    else
+      if(input$Country =="Spain" && input$Criteria=="Exports"   )
+        return(d$Spain)
+    else
+      if(input$Country =="Ireland" && input$Criteria=="Exports" )
+        return(d$Ireland)
+    else
+      if(input$Country =="Bulgaria" && input$Criteria=="Exports" )
+        return(d$Bulgaria)
+    else
+      if(input$Country =="Canada"  && input$Criteria=="Exports" )
+        return(d$Canada)
+    else
+      if(input$Country =="Australia" && input$Criteria=="Exports" )
+        return(d$Australia)
+    else
+      if(input$Country =="Armenia" && input$Criteria=="Exports" )
+        return(d$Armenia)
+  })
+  
+#Plotting the graph for selected input  
+  output$fig <- renderPlot(
+  plot(year,dummy(),col="red",type="b",main="GDP Locus of the Conutry over the Years",ylab="USD Millions",xlab="Year")
+  )}
+
+# Function to knit them together to build the shiny app
+shinyApp(ui = ui, server = server)
+
+library(shinyapps)
+shinyapps::deployApp('C:/Users/HP/Documents/ShinnyApp_Srijan.rmd')
+
